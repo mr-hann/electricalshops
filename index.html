@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--boostrap included in the project-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- font included-->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <!--my stylesheet-->
+    <link href="css/css.css" rel="stylesheet">
+    <!--map api-->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <!--api link-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>  
+	<title> Electrical Shops </title>
+</head>
+
+<body>
+<!--navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+  <a class="navbar-brand" href="#"><strong>E</strong><small class="">.shops</small></a>
+    
+    <!--form search for nav section large screens-->  
+    <form class="form-inline" name="dataform" >
+        
+        <div class="input-group">
+          <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon" name="state">
+            <option value="Delta">Delta</option>
+            <option value="Port Harcourt">Port Harcourt</option>
+            <option value="lagos">Lagos</option>
+            <option value="Abuja">Abuja</option>
+          </select>
+          
+        <select class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon" name="country">
+            <option value="Nigeria">Nigeria</option>
+          </select>
+        <button class="btn btn-info search" onclick="fetchdata()" type="button">Search</button>
+        </div>
+    
+        
+    </form>
+      <!--end of form-->
+</nav>
+    
+<!--navbar-->
+    
+    <!--hero section-->
+    <div class="container-fluid bg-primary">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <img class="img-fluid d-none-md fade-in-image" src="img/hero%20bg.png" alt="shope image">
+            </div>
+            <div class="col-lg-6 col-md-12 text-white my-4 py-3">
+                <h1 class="header"><strong>E</strong>.shops</h1>
+                <h4>Explore from millions of results</h4>
+                <p>This platform help to search for electrical shops around your specified location.</p>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid bg-white">
+        <div class="row">
+            <div class="container text-center">
+                <div class="row py-3">
+                    
+                    <div class="col-md-4 col-sm-12"> 
+                        <div class="row">
+                            <div class="col-sm-2 p-2">
+                                <i class="bi bi-speedometer text-warning lg-i"></i>
+                            </div>
+                            <div class="col-sm-8">
+                                <h4 class="">Free & Easy</h4><span>explore a list of electrical shops around you for free</span>
+                            </div>
+                        </div>   
+                    </div>
+
+
+                    <div class="col-md-4 col-sm-12"> 
+                        <div class="row">
+                            <div class="col-sm-2 p-2">
+                                <i class="bi bi-geo-alt text-warning lg-i"></i>
+                            </div>
+                            <div class="col-sm-8">
+                                <h4 class="">Locate</h4><span>select any location of your choice within <b>Nigeria.</b></span>
+                            </div>
+                        </div>     
+                    </div>
+
+                    <div class="col-md-4 col-sm-12"> 
+                        <div class="row">
+                            <div class="col-sm-2 p-2">
+                                <i class="bi bi-shield text-warning lg-i"></i>
+                            </div>
+                            <div class="col-sm-8">
+                                <h4 class="">Authentic</h4><span>The provided information is directly from the shop owners.</span>
+                            </div>
+                        </div>     
+                    </div>
+                </div>
+            </div>
+             
+        </div>
+    </div>
+    <!--end of herro section-->
+                  
+    <!--main content section-->
+    
+    <!--recomended-->
+    <div class="container-fluid my-6 con" id="con">
+        <!--header-->
+        <h2 class="header text-center">Explore</h2>
+        
+            <!--load screen-->    
+            <div class="text-center d-none loading">           
+                <div class="spinner-border text-info my-4 big" role="status">
+                      <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <!--end of load screen-->
+
+        <!--card containment-->
+        <div class="row myt-6 row-cols-1 row-cols-md-3 check" id="cntnts">
+            
+
+            
+        </div>
+
+    </div>
+       
+    
+    
+    
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div  class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          
+         <div class="container">
+          <div class="row">
+             <div class="col-md-6">
+              <div id="map" style="height: 80vh; width: 80vw">
+                  
+              </div>             
+              </div>
+             </div>
+          </div>
+                    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--end modal-->
+    
+    
+    
+    
+  
+    
+    
+   <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-12 my-3 ash">
+            <hr>
+                <small>© 2021 project Federal University of Petroleum Resources Effurun, Delta State.(FUPRE)</small>
+            </div>
+        </div>
+    </div>
+    
+<button id="myBtn" class="btn btn-info rounded-circle ripple scrollToTop" ><i class="bi bi-arrow-up"></i></button>
+    
+  
+<!--jqury-->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+<!--api ffor the map-->
+     <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=&v=weekly&channel=2"
+      async
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="js/js.js">
+    </script>
+</body>
+</html>
