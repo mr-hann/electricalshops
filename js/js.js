@@ -91,7 +91,8 @@ try {
     //card image created
     var img = document.createElement("img");
     img.onerror = function(){
-       img.innerHTML = '<i class="bi bi-tools lg-i"></i>';
+       img.innerHTML = '<i class="bi bi-tools ash bg-info lg-i"></i>';
+       img.src = 'img/shop.svg';
     }
 
     card.appendChild(img);
@@ -106,7 +107,7 @@ try {
     ttle.className="card-title";
     //putting the text created in the card 
     crdbdy.appendChild(ttle);
-   // creating div when the data is been resived
+   // creating div when the data is been recived
     var rtngbr = document.createElement("div");
 
     //star rating 
@@ -178,6 +179,13 @@ try {
     btn.setAttribute("data-target","#staticBackdrop");
 
 
+
+
+
+
+
+
+
     //map api
 
     btn.addEventListener("click", ()=>{
@@ -218,7 +226,7 @@ try {
             })
 
 
-//map
+
 
 
 
@@ -244,3 +252,42 @@ try {
 
 }
 
+
+/*this code below check the user input in the search bar compares the value with the name of the shops provided by the api
+displayed on the page, and check if its matchies and display the one that matchies on the screen.
+
+
+//get the search bar
+var search=document.querySelector(".search");
+
+//add events
+search.addEventListener('keyup',function(e){
+    var latter=e.target.value.toString();
+
+//check if the api data is displayed on the page
+if(check.children.length>1){
+
+  //get the api displayed  data i need
+   var title=document.querySelectorAll('.card-title');
+   var card=document.querySelectorAll('.card');
+ 
+ //loop through the data
+ let i=0;
+while(i<title.length){
+  //get the api data title
+    var contentPage=title[i].innerHTML.toString();
+//check if the search value matchies with the api data title
+    if(contentPage.toLowerCase().indexOf(latter.toLowerCase())!=-1){
+//display the data
+     card[i].parentElement.style.display="none";
+      
+    }else{
+
+    }
+    i++;
+}
+
+}
+    
+})
+  */
